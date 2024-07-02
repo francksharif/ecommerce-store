@@ -24,6 +24,8 @@ class Product(models.Model):
     slug = models.SlugField(max_length=250)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='images/')
+    category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE, null=True)
+
 
     class Meta:
         verbose_name_plural = 'products'
