@@ -79,7 +79,12 @@ def login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 auth.login(request, user)
-                return redirect("")
+                return redirect("user-dashboard")
             
     context = {'form': form}
     return render(request, 'account/login.html', context=context)
+
+
+
+def dashboard(request):
+    return render(request, 'account/dashboard.html')
