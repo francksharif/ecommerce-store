@@ -18,7 +18,9 @@
             <h4>Welcome, <strong>{{user}}</strong></h4>
 
             <hr>
-
+                <li>Check Orders</li>
+                <li>Manage Profil</li>
+                <li>Delete Account</li>
 
 
             <br>
@@ -30,7 +32,9 @@
 
         <div class="container bg-white shadow-md p-5 form-layout">
             <h4>Track your orders</h4>
+            <hr>
             <br>
+            <p>Track all of your orders </p>
 
             <a href="{% url 'account-logout' %}" class='btn btn-primary navabr-btn text-white'>My Orders</a>
 
@@ -39,10 +43,11 @@
         <br>
         <div class="container bg-white shadow-md p-5 form-layout">
             <h4>Manage your account</h4>
+            <hr>
             <br>
+            <p>Update or Delete account</p>
             <a href="{% url 'profile-management' %}" class='btn btn-primary navabr-btn text-white'>Manage Profile</a>
-            <br><br>
-            <a href="{% url 'account-logout' %}" class='btn btn-danger navabr-btn text-white'>Logout</a>
+            <br>
         </div>
     </body>
 

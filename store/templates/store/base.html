@@ -110,10 +110,26 @@
 
 
         <div class="collapse navbar-collapse text-center" id="navbarNavDropdown">
+
             
             <ul class="navbar-nav ms-auto">
+                
+                {% if user.is_authenticated %}
+
+                <li class="nav-item">
+            
+                    <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'user-dashboard' %}"> Dashboard </a>
+
+                </li>
 
 
+                <li class="nav-item">
+
+                    <a class="btn btn-alert navbar-btn text-red" type="button"  href="{% url 'account-logout' %}"> Logout </a>
+
+                </li>
+                
+                {% else %}
                 <li class="nav-item">
             
                     <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'account-register' %}"> Register </a>
@@ -126,6 +142,8 @@
                     <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'account-login' %}"> Login </a>
 
                 </li>
+
+                {% endif %}
 
 
                 &nbsp; &nbsp; &nbsp;

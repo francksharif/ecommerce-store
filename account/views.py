@@ -103,12 +103,13 @@ def dashboard(request):
 
 @login_required(login_url='account-login')
 def profile_management(request):
+    user_form = UpdateUserForm(instance=request.user)
     if request.method == 'POST':
         user_form = UpdateUserForm(request.POST, instance=request.user)
         if user_form.is_valid():
             user_form.save()
             return redirect('user-dashboard')
-    user_form = UpdateUserForm(instance=request.user)
+    
     context = {'form': user_form}
     return render(request, 'account/profile_management.html', context=context)
 
