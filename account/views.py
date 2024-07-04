@@ -96,3 +96,12 @@ def logout(request):
 def dashboard(request):
     return render(request, 'account/dashboard.html')
 
+@login_required(login_url='account-login')
+def profile_management(request):
+    return render(request, 'account/profile_management.html')
+
+@login_required(login_url='account-login')
+def delete_profile(request):
+    return render(request, 'account/delete_account.html')
+    
+

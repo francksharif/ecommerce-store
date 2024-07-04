@@ -9,7 +9,7 @@ urlpatterns = [
     # User login 
     path('login/', views.login, name='account-login'),
 
-    #User logout
+    # User logout
     path('logout/', views.logout, name='account-logout' ),
 
     # Email verification paths 
@@ -18,6 +18,8 @@ urlpatterns = [
     path('email_verification_success/', views.email_verification_success, name='email-verification-success'),
     path('email_verification_failed/', views.email_verification_failed, name='email-verification-failed'),
 
-    # User Dashboard
+    # User Dashboard / Profile Management
     path('dashboard/', views.dashboard, name='user-dashboard'),
+    path('profile_management/', views.profile_management, name='profile-management'),
+    path('delete_profile/', views.delete_profile, name='account-delete'),
 ]
