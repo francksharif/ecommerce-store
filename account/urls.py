@@ -5,4 +5,10 @@ from . import views
 urlpatterns = [
     path('register', views.register, name='account-register'),
 
+    # Email verification paths 
+    path('email_verification', views.register, name='email-verification'),
+    path('email_verification_sent', views.email_verification_sent, name='email-verification-sent'),
+    path('email_verification_success', views.email_verification_success, name='email-verification-success'),
+    path('email_verification_failed', views.email_verification_failed, name='email-verification-failed'),
+
 ]
