@@ -3,7 +3,11 @@ from . import views
 
 
 urlpatterns = [
+    # User registration
     path('register', views.register, name='account-register'),
+
+    # User login 
+    path('login', views.login, name='account-login'),
 
     # Email verification paths 
     path('email_verification<str:uidb64>/<str:token>', views.email_verification, name='email-verification'),

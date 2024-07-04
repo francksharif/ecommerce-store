@@ -1,0 +1,42 @@
+{% include "store/base.html" %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content%}
+
+    <body>
+
+        <style>
+            body {
+                background-color: gray;
+
+            }
+        </style>
+        <br>
+        <div class="container bg-white shadow-md p-5 form-layout">
+            <h3 class="text-center">Log In your account</h3>
+
+            <br>
+            <br>
+
+            <form action="" method="POST" autocomplete="off">
+                {% csrf_token %}
+
+                {{form.username|as_crispy_field}}
+                <br>
+                {{form.password|as_crispy_field}}
+
+
+                <br>
+                <button type="submit" class="btn btn-primary btn-lg w-100 btn-block p-2 bg-blue">
+                    &nbsp; Log In
+                </button>
+            </form>
+        </div>
+    </body>
+
+
+
+{% endblock %}

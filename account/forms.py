@@ -1,8 +1,24 @@
 from typing import Any
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.forms.widgets import PasswordInput, TextInput
 from django.contrib.auth.models import User
 from django import forms
 
+
+
+""" User Login Form """
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(widget=TextInput())
+    password = forms.CharField(widget=PasswordInput())
+
+
+
+
+
+
+
+""" User Registration Form """ 
 
 class CreateUserForm(UserCreationForm):
 
