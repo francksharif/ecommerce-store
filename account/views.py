@@ -7,6 +7,7 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from .forms import CreateUserForm, LoginForm
 from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -86,5 +87,12 @@ def login(request):
 
 
 
+def logout(request):
+    auth.logout(request)
+    return redirect('store')
+
+
+@login_required(login_url='account-login')
 def dashboard(request):
     return render(request, 'account/dashboard.html')
+
