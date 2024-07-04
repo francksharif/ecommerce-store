@@ -4,7 +4,7 @@ from .token import user_tokenizer_generate
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from .forms import CreateUserForm, LoginForm
+from .forms import CreateUserForm, LoginForm, UpdateUserForm
 from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -87,18 +87,33 @@ def login(request):
 
 
 
+
 def logout(request):
     auth.logout(request)
     return redirect('store')
+
 
 
 @login_required(login_url='account-login')
 def dashboard(request):
     return render(request, 'account/dashboard.html')
 
+
+
+
 @login_required(login_url='account-login')
 def profile_management(request):
-    return render(request, 'account/profile_management.html')
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+            return redirect('user-dashboard')
+    user_form = UpdateUserForm(instance=request.user)
+    context = {'form': user_form}
+    return render(request, 'account/profile_management.html', context=context)
+
+
+
 
 @login_required(login_url='account-login')
 def delete_profile(request):
