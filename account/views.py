@@ -8,6 +8,7 @@ from .forms import CreateUserForm, LoginForm, UpdateUserForm
 from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 
@@ -89,7 +90,16 @@ def login(request):
 
 
 def logout(request):
-    auth.logout(request)
+    try:
+        for key in list(request.session.keys()):
+            if key == 'session_key':
+                continue
+            else:
+                del request.session[key]
+    except KeyError:
+        pass
+    messages.success(request, "Logout success")
+
     return redirect('store')
 
 
@@ -108,6 +118,7 @@ def profile_management(request):
         user_form = UpdateUserForm(request.POST, instance=request.user)
         if user_form.is_valid():
             user_form.save()
+            messages.info(request, "Updated success")
             return redirect('user-dashboard')
     
     context = {'form': user_form}
@@ -121,6 +132,7 @@ def delete_profile(request):
     user = User.objects.get(id=request.user.id)
     if request.method == 'POST':
         user.delete()
+        messages.success(request, "Account deleted")
         return redirect('store')
     return render(request, 'account/delete_account.html')
     
