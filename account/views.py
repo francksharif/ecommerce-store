@@ -9,6 +9,8 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from payment.forms import ShippingForm
+from payment.models import ShippingAddress
 
 
 
@@ -137,3 +139,24 @@ def delete_profile(request):
     return render(request, 'account/delete_account.html')
     
 
+
+# Shipping view 
+@login_required(login_url='account-login')
+def manage_shipping(request):
+    try:
+        shipping = ShippingAddress.objects.get(user=request.user.id)
+    except ShippingAddress.DoesNotExist:
+        shipping = None
+
+    form = ShippingForm(instance=shipping)
+
+    if request.method == 'POST':
+        form = ShippingForm(request.POST, instance=shipping)
+        if form.is_valid():
+            shipping_user = form.save(commit=False)
+            shipping_user.user = request.user
+            shipping_user.save()
+            return redirect('user-dashboard')
+    
+    context = {'form': form}
+    return render(request, 'account/manage_shipping.html', context=context)
