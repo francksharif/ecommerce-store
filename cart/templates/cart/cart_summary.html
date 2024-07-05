@@ -116,9 +116,14 @@
       <div class="col-12 text-end">
  
         <div class="h6 fw-bold"> Sub total: $ <div id="total" class="d-inline-flex"> {{ cart.get_total}} </div></div>
- 
+        {% if cart %}
+        <a href="{% url 'checkout' %}" class="btn btn-primary my-2"> Proceed to Checkout </a>
+        {% endif %}
       </div>
- 
+      
+      <br>
+
+
 
     </div>
     
